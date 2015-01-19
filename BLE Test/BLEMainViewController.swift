@@ -44,7 +44,28 @@ class BLEMainViewController : UIViewController, UINavigationControllerDelegate, 
     @IBOutlet var warningLabel:UILabel!
     
     @IBOutlet var helpViewController:HelpViewController!
+    @IBOutlet var inputField : UITextField!
+    @IBOutlet var output : UITextView!
+    @IBOutlet var question : UITextView!
+    var x = Int(arc4random_uniform(UInt32(1000 - 0 + 1)));
+    var y = Int(arc4random_uniform(UInt32(1000 - 0 + 1)));
     
+    @IBAction func guess(sender : UIButton) {
+        var z = x + y;
+        var number = inputField.text.toInt()
+        if(number == z){
+            output.text = "Get Candy";
+            x = Int(arc4random_uniform(UInt32(1000 - 0 + 1)));
+            y = Int(arc4random_uniform(UInt32(1000 - 0 + 1)));
+            question.text = String(x) + " + " + String(y);
+        }
+        else{
+            output.text = "Dont Get Candy, Try Again";
+            x = Int(arc4random_uniform(UInt32(1000 - 0 + 1)));
+            y = Int(arc4random_uniform(UInt32(1000 - 0 + 1)));
+            question.text = String(x) + " + " + String(y);
+        }
+    }
     private var cm:CBCentralManager?
     private var currentAlertView:UIAlertView?
     private var currentPeripheral:BLEPeripheral?
@@ -375,6 +396,7 @@ class BLEMainViewController : UIViewController, UINavigationControllerDelegate, 
         
         // Start connection timeout timer
         connectionTimer = NSTimer.scheduledTimerWithTimeInterval(connectionTimeOutIntvl, target: self, selector: Selector("connectionTimedOut:"), userInfo: nil, repeats: false)
+            
     }
     
     
