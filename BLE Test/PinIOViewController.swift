@@ -37,29 +37,8 @@ class PinIOViewController : UIViewController, UITableViewDataSource, UITableView
     @IBOutlet var digitalPinCell : PinCell!
     @IBOutlet var helpViewController : HelpViewController!
     @IBOutlet var debugConsole : UITextView? = nil
-    @IBOutlet var inputField : UITextField!
-    @IBOutlet var output : UITextView!
-    @IBOutlet var question : UITextView!
-    var x = Int(arc4random_uniform(UInt32(1000 - 0 + 1)));
-    var y = Int(arc4random_uniform(UInt32(1000 - 0 + 1)));
     
-    @IBAction func guess(sender : UIButton) {
-        var z = x + y;
-        var number = inputField.text.toInt()
-        if(number == z){
-            output.text = "Get Candy";
-            x = Int(arc4random_uniform(UInt32(1000 - 0 + 1)));
-            y = Int(arc4random_uniform(UInt32(1000 - 0 + 1)));
-            question.text = String(x) + " + " + String(y);
-        }
-        else{
-            output.text = "Dont Get Candy, Try Again";
-            x = Int(arc4random_uniform(UInt32(1000 - 0 + 1)));
-            y = Int(arc4random_uniform(UInt32(1000 - 0 + 1)));
-            question.text = String(x) + " + " + String(y);
-        }
-    }
-
+    
     private let invalidCellPath = NSIndexPath(forItem: -1, inSection: -1)
     private var openCellPath : NSIndexPath = NSIndexPath(forItem: -1, inSection: -1)
     private var cells : [PinCell?] = []
@@ -99,8 +78,7 @@ class PinIOViewController : UIViewController, UITableViewDataSource, UITableView
     override func viewDidLoad() {
 
         super.viewDidLoad()
-        
-        question.text = String(x) + " + " + String(y);
+
         //initialization
 
         helpViewController!.delegate = self.delegate
@@ -194,8 +172,6 @@ class PinIOViewController : UIViewController, UITableViewDataSource, UITableView
                 //starting as analog on pin 5
                 if (cell.analogPin == 5) {
                     cell.setDefaultsWithMode(PinMode.Analog)
-                    
-                    
                 }
                 else{
                     cell.setDefaultsWithMode(PinMode.Input)

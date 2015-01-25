@@ -40,6 +40,7 @@
 		F02F2BB519EE83AC0057F374 /* DeviceListViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = F02F2BB419EE83AC0057F374 /* DeviceListViewController_iPhone.xib */; };
 		F02F6EEB1A247F160080FFDF /* ControllerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02F6EE91A247F160080FFDF /* ControllerViewController.swift */; };
 		F02F6EEC1A247F160080FFDF /* ControllerViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = F02F6EEA1A247F160080FFDF /* ControllerViewController_iPhone.xib */; };
+		F051AAD719DA96F7009A1383 /* UARTViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F051AAD619DA96F7009A1383 /* UARTViewController.swift */; };
 		F05E7E0318BEF399005E25F6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F05E7E0218BEF399005E25F6 /* Images.xcassets */; };
 		F060841019F4CF8F0058B4E4 /* AttributeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F060840F19F4CF8F0058B4E4 /* AttributeCell.swift */; };
 		F0718E0019EE77F4002B5ABB /* DeviceListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0718DFF19EE77F4002B5ABB /* DeviceListViewController.swift */; };
@@ -499,6 +500,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F051AAD719DA96F7009A1383 /* UARTViewController.swift in Sources */,
 				F0D4AFB91A32505300E9063E /* SensorValueCell.swift in Sources */,
 				F08849D119E47EE6002B442A /* PinIOViewController.swift in Sources */,
 				F0BCF06819EBDC59006086C6 /* BLEAppDelegate.swift in Sources */,
@@ -560,8 +562,7 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Adafruit Industries LLC (2X94RM7457)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -593,8 +594,8 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Adafruit Industries LLC (2X94RM7457)";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -602,7 +603,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "F0F391F0-C781-4C8F-8735-1CB89D26B730";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;

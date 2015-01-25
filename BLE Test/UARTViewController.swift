@@ -44,6 +44,7 @@ class UARTViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
     @IBOutlet var sendButton: UIButton!
     @IBOutlet var echoSwitch:UISwitch!
     
+    
     private var echoLocal:Bool = false
     private var keyboardIsShown:Bool = false
     private var consoleAsciiText:NSAttributedString? = NSAttributedString(string: "")
@@ -82,26 +83,8 @@ class UARTViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
     
     
     override func viewDidLoad(){
-        
-        //setup help view
-        self.helpViewController.title = "UART Help"
-        self.helpViewController.delegate = delegate
-        
-        //round corners on console
-        self.consoleView.clipsToBounds = true
-        self.consoleView.layer.cornerRadius = 4.0
-        
-        //round corners on inputTextView
-        self.inputTextView.clipsToBounds = true
-        self.inputTextView.layer.cornerRadius = 4.0
-        
-        //retrieve console font
-        let consoleFont = consoleView.font
-        blueFontDict = NSDictionary(objects: [consoleFont!, UIColor.blueColor()], forKeys: [NSFontAttributeName,NSForegroundColorAttributeName])
-        redFontDict = NSDictionary(objects: [consoleFont!, UIColor.redColor()], forKeys: [NSFontAttributeName,NSForegroundColorAttributeName])
-        
-        //fix for UITextView
-        consoleView.layoutManager.allowsNonContiguousLayout = false
+        //question_count = Int(arc4random_uniform(UInt32(3 - 0 + 1)));
+        question.text = questions[question_count][0];
         
     }
     
@@ -118,11 +101,6 @@ class UARTViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
     override func viewWillAppear(animated: Bool) {
         
         super.viewWillAppear(animated)
-        
-        //update per prefs
-        echoLocal = uartShouldEchoLocal()
-        echoSwitch.setOn(echoLocal, animated: false)
-        
         //register for keyboard notifications
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name: "UIKeyboardWillShowNotification", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name: "UIKeyboardWillHideNotification", object: nil)
@@ -136,10 +114,7 @@ class UARTViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        scrollTimer?.invalidate()
         
-        scrollTimer = NSTimer.scheduledTimerWithTimeInterval(0.5, target: self, selector: Selector("scrollConsoleToBottom:"), userInfo: nil, repeats: true)
-        scrollTimer?.tolerance = 0.75
     }
     
     
@@ -227,19 +202,19 @@ class UARTViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
 //        if ((time - lastScroll) > scrollIntvl) {
         
             //write string to console based on mode selection
-           //switch (consoleModeControl.selectedSegmentIndex) {
-            //case 0:
+            switch (consoleModeControl.selectedSegmentIndex) {
+            case 0:
                 //ASCII
-             //   consoleView.attributedText = consoleAsciiText
-             //   break
-            //case 1:
-                //Hex
-             //   consoleView.attributedText = consoleHexText
-             //   break
-            //default:
                 consoleView.attributedText = consoleAsciiText
-            //    break
-            //}
+                break
+            case 1:
+                //Hex
+                consoleView.attributedText = consoleHexText
+                break
+            default:
+                consoleView.attributedText = consoleAsciiText
+                break
+            }
             
 //            scrollConsoleToBottom()
 //            lastScroll = time
@@ -249,21 +224,6 @@ class UARTViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
     }
     
     
-    func scrollConsoleToBottom(timer:NSTimer) {
-    
-//        printLog(self, "scrollConsoleToBottom", "")
-        
-        let newLength = consoleView.attributedText.length
-        
-        if lastScrolledLength != newLength {
-            
-            consoleView.scrollRangeToVisible(NSMakeRange(newLength-1, 1))
-            
-            lastScrolledLength = newLength
-            
-        }
-        
-    }
     
     
     func updateConsoleWithOutgoingString(newString:NSString){
@@ -342,7 +302,44 @@ class UARTViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
         
     }
     
+    @IBOutlet var InputField : UITextField!
+    @IBOutlet var output : UITextView!
+    @IBOutlet var question : UITextView!
     
+    var questions = [["3 * 5", "15"], ["What's \"hello\" in Spanish?", "hola"], ["What are the first three digits of Pi?", "3.14"], ["How many bits in a byte?", "8"]];
+    //var x = Int(arc4random_uniform(UInt32(100 - 0 + 1)));
+    //var y = Int(arc4random_uniform(UInt32(100 - 0 + 1)));
+    var question_count = Int(arc4random_uniform(UInt32(3 - 0 + 1)));
+    
+    @IBAction func submit(sender : UIButton) {
+        //var z = x + y;
+        println(question_count);
+        println(questions[question_count][1]);
+        
+        var answer = String(inputField.text);
+        println(answer);
+        if answer == questions[question_count][1] {
+            output.text = "Get Candy!";
+            //x = Int(arc4random_uniform(UInt32(100 - 0 + 1)));
+            //y = Int(arc4random_uniform(UInt32(100 - 0 + 1)));
+            question_count = Int(arc4random_uniform(UInt32(3 - 0 + 1)));
+            question.text = questions[question_count][0];
+            
+            let newString:NSString = "a";
+            let data = NSData(bytes: newString.UTF8String, length: newString.length)
+            delegate?.sendData(data)
+        }
+        else{
+            output.text = "Dont Get Candy, Try Again";
+            //x = Int(arc4random_uniform(UInt32(100 - 0 + 1)));
+            //y = Int(arc4random_uniform(UInt32(100 - 0 + 1)));
+            //question.text = ;
+        }
+        
+        
+        
+    }
+
     @IBAction func sendMessage(sender:AnyObject){
         
 //        sendButton.enabled = false
@@ -430,13 +427,13 @@ class UARTViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
         if let keyboardSize = (sender.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
             
             var yOffset:CGFloat = keyboardSize.height
-            var oldRect:CGRect = msgInputView.frame
+            //var oldRect:CGRect = msgInputView.frame
             msgInputYContraint?.constant -= yOffset     //Using autolayout on iPad
             
 //            if (IS_IPAD){
             
-                var newRect = CGRectMake(oldRect.origin.x, oldRect.origin.y - yOffset, oldRect.size.width, oldRect.size.height)
-                self.msgInputView.frame = newRect   //frame animates automatically
+               // var newRect = CGRectMake(oldRect.origin.x, oldRect.origin.y - yOffset, oldRect.size.width, oldRect.size.height)
+                //self.msgInputView.frame = newRect   //frame animates automatically
 //            }
 //            
 //            else {  //iPhone
