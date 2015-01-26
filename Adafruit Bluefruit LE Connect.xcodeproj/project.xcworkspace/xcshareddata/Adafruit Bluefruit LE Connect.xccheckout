@@ -10,6 +10,8 @@
 	<string>Adafruit Bluefruit LE Connect</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
+		<key>48E21E55B9E09704F09BAEE0D529FC1DC7E2C856</key>
+		<string>https://github.com/rohitbsehgal/bluetoothcandydispense.git</string>
 		<key>7CA584A5A04338BBB979A7C3D046CCC127EFF018</key>
 		<string>https://github.com/adafruit/Bluefruit-Connect.git</string>
 		<key>EEC5FD51-8F26-4CF2-91CA-D1A9857634DE</key>
@@ -19,17 +21,19 @@
 	<string>Adafruit Bluefruit LE Connect.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>7CA584A5A04338BBB979A7C3D046CCC127EFF018</key>
+		<key>48E21E55B9E09704F09BAEE0D529FC1DC7E2C856</key>
 		<string>../..</string>
+		<key>7CA584A5A04338BBB979A7C3D046CCC127EFF018</key>
+		<string>../../../Bluefruit%20Connect</string>
 		<key>EEC5FD51-8F26-4CF2-91CA-D1A9857634DE</key>
 		<string>../../../Bluefruit Connect</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/adafruit/Bluefruit-Connect.git</string>
+	<string>https://github.com/rohitbsehgal/bluetoothcandydispense.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>7CA584A5A04338BBB979A7C3D046CCC127EFF018</string>
+	<string>48E21E55B9E09704F09BAEE0D529FC1DC7E2C856</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
@@ -47,6 +51,14 @@
 			<string>7CA584A5A04338BBB979A7C3D046CCC127EFF018</string>
 			<key>IDESourceControlWCCName</key>
 			<string>Bluefruit%20Connect</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>48E21E55B9E09704F09BAEE0D529FC1DC7E2C856</string>
+			<key>IDESourceControlWCCName</key>
+			<string>bluetoothcandydispense</string>
 		</dict>
 	</array>
 </dict>
